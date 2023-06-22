@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-//@WebServlet("/thymeleaf")
+@WebServlet("/thymeleaf")
 public class ThymeleafServlet extends HttpServlet {
     private TemplateEngine engine;
 

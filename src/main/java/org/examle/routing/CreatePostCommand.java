@@ -21,6 +21,6 @@ public class CreatePostCommand implements Command {
         Post newPost = new Post(id, author, post);
         repository.addPost(newPost);
 
-        resp.sendRedirect("/Mod92/get/all/posts");
+        resp.sendRedirect("/Mod92/post/get/all/posts");
     }
 }

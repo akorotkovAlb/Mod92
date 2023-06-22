@@ -1,24 +1,17 @@
 package org.examle.routing;
 
-import org.examle.ptg.post.Post;
-import org.examle.ptg.post.PostRepository;
 import org.examle.ptg.post.PostRepositoryImpl;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
-import java.util.UUID;
 
-@WebServlet("/post/*")
+@WebServlet("/*")
 public class FrontControllerServlet extends HttpServlet {
     private TemplateEngine engine;
     private PostRepositoryImpl repository;

@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
-//@WebServlet("/post-to-get/*")
+@WebServlet("/post-to-get/*")
 public class PostToGetServlet extends HttpServlet {
     private TemplateEngine engine;
     private PostRepository repository;

@@ -18,6 +18,6 @@ public class DeletePostCommand implements Command {
             repository.deleteById(id);
         }
 
-        resp.sendRedirect("/Mod92/get/all/posts");
+        resp.sendRedirect("/Mod92/post/get/all/posts");
     }
 }

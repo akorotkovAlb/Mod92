@@ -6,6 +6,7 @@ import org.thymeleaf.TemplateEngine;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,9 +27,12 @@ public class CommandService {
         String uri = req.getRequestURI();
         String method = req.getMethod();
         String commandKey = method + " " + uri;
-        if (commands.containsKey(uri)) {
+        if (commands.containsKey(commandKey)) {
             commands.get(commandKey).process(req, resp, engine, repository);
         } else {
+            resp.setContentType("text/html");
+            PrintWriter writer = resp.getWriter();
+            writer.print("<h1>Error!</h1>");
             // do something!
         }
     }
