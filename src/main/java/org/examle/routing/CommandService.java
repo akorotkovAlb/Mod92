@@ -1,5 +1,6 @@
 package org.examle.routing;
 
+import org.examle.ptg.post.PostRepository;
 import org.examle.ptg.post.PostRepositoryImpl;
 import org.thymeleaf.TemplateEngine;
 
@@ -23,7 +24,7 @@ public class CommandService {
     }
 
     public void process(HttpServletRequest req, HttpServletResponse resp,
-                        TemplateEngine engine, PostRepositoryImpl repository) throws IOException {
+                        TemplateEngine engine, PostRepository repository) throws IOException {
         String uri = req.getRequestURI();
         String method = req.getMethod();
         String commandKey = method + " " + uri;
@@ -33,6 +34,7 @@ public class CommandService {
             resp.setContentType("text/html");
             PrintWriter writer = resp.getWriter();
             writer.print("<h1>Error!</h1>");
+            resp.setStatus(418);
             // do something!
         }
     }

@@ -1,5 +1,10 @@
 package org.examle.routing;
 
+import lombok.SneakyThrows;
+import org.examle.DBRepositoryImpl;
+import org.examle.PostgresDatabase;
+import org.examle.props.PropertyReader;
+import org.examle.ptg.post.PostRepository;
 import org.examle.ptg.post.PostRepositoryImpl;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
@@ -10,17 +15,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.Objects;
 
 @WebServlet("/*")
 public class FrontControllerServlet extends HttpServlet {
     private TemplateEngine engine;
-    private PostRepositoryImpl repository;
+    private PostRepository repository;
     private CommandService commandService;
 
+    @SneakyThrows
     @Override
     public void init() throws ServletException {
+        Connection connection = DriverManager.getConnection(
+                Objects.requireNonNull(PropertyReader.getConnectionUrlForPostgres()),
+                PropertyReader.getUserForPostgres(), PropertyReader.getPasswordForPostgres());
         engine = new TemplateEngine();
-        repository = new PostRepositoryImpl();
+        repository = new DBRepositoryImpl(connection);
         commandService = new CommandService();
 
         FileTemplateResolver resolver = new FileTemplateResolver();

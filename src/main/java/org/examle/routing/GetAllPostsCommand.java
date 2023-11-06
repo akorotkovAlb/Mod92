@@ -1,5 +1,6 @@
 package org.examle.routing;
 
+import org.examle.ptg.post.PostRepository;
 import org.examle.ptg.post.PostRepositoryImpl;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -12,7 +13,7 @@ import java.util.Map;
 public class GetAllPostsCommand implements Command {
     @Override
     public void process (HttpServletRequest req, HttpServletResponse resp,
-                         TemplateEngine engine, PostRepositoryImpl repository) throws IOException {
+                         TemplateEngine engine, PostRepository repository) throws IOException {
         resp.setContentType("text/html");
 
         Context simpleContext = new Context(req.getLocale(), Map.of("posts", repository.getAllPosts()));

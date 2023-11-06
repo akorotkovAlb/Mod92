@@ -1,5 +1,6 @@
 package org.examle.routing;
 
+import org.examle.ptg.post.PostRepository;
 import org.examle.ptg.post.PostRepositoryImpl;
 import org.thymeleaf.TemplateEngine;
 
@@ -10,5 +11,5 @@ import java.io.IOException;
 public interface Command {
 
     void process(HttpServletRequest req, HttpServletResponse resp,
-                 TemplateEngine engine, PostRepositoryImpl repository) throws IOException;
+                 TemplateEngine engine, PostRepository repository) throws IOException;
 }

@@ -1,6 +1,7 @@
 package org.examle.routing;
 
 import org.examle.ptg.post.Post;
+import org.examle.ptg.post.PostRepository;
 import org.examle.ptg.post.PostRepositoryImpl;
 import org.thymeleaf.TemplateEngine;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
 public class CreatePostCommand implements Command {
     @Override
     public void process (HttpServletRequest req, HttpServletResponse resp,
-                         TemplateEngine engine, PostRepositoryImpl repository) throws IOException {
+                         TemplateEngine engine, PostRepository repository) throws IOException {
         String author = req.getParameter("author");
         String post = req.getParameter("post");
         String id = UUID.randomUUID().toString();
