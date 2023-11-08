@@ -6,6 +6,8 @@ import org.examle.ptg.post.PostRepositoryImpl;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
+import org.thymeleaf.templateresolver.WebApplicationTemplateResolver;
+import org.thymeleaf.web.servlet.JavaxServletWebApplication;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,8 +31,12 @@ public class PostToGetServlet extends HttpServlet {
         engine = new TemplateEngine();
         repository = new PostRepositoryImpl();
 
-        FileTemplateResolver resolver = new FileTemplateResolver();
-        resolver.setPrefix("C:/java_dev/9/Mod92/templates/");
+        JavaxServletWebApplication jswa =
+                JavaxServletWebApplication.buildApplication(this.getServletContext());
+
+        WebApplicationTemplateResolver
+                resolver = new WebApplicationTemplateResolver(jswa);
+        resolver.setPrefix("/WEB-INF/temp/");
         resolver.setSuffix(".html");
         resolver.setTemplateMode("HTML5");
         resolver.setOrder(engine.getTemplateResolvers().size());

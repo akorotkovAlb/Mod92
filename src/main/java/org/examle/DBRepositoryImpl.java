@@ -54,6 +54,7 @@ public class DBRepositoryImpl implements PostRepository {
             this.insertStatement.setString(1, post.getId());
             this.insertStatement.setString(2, post.getAuthor());
             this.insertStatement.setString(3, post.getPost());
+            this.insertStatement.executeUpdate();
         } catch(SQLException e) {
             System.out.println("Insert post exception. Reason: " + e.getMessage());
         }
@@ -63,6 +64,7 @@ public class DBRepositoryImpl implements PostRepository {
     public void deleteById (String id) {
         try {
             this.deleteStatement.setString(1, id);
+            this.deleteStatement.executeUpdate();
         } catch(SQLException e) {
             System.out.println("Delete post exception. Reason: " + e.getMessage());
         }
