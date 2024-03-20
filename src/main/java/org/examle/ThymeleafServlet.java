@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 
 @WebServlet("/thymeleaf")
 public class ThymeleafServlet extends HttpServlet {
@@ -42,16 +43,35 @@ public class ThymeleafServlet extends HttpServlet {
     protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
 
-        Map<String, String[]> parameterMap = req.getParameterMap();
+//        Map<String, String[]> parameterMap = req.getParameterMap();
         Map<String, String> params = new LinkedHashMap<>();
 
-        for (Map.Entry<String, String[]> keyValue : parameterMap.entrySet()) {
-            params.put(keyValue.getKey(), Arrays.toString(keyValue.getValue()));
+//        for (Map.Entry<String, String[]> keyValue : parameterMap.entrySet()) {
+//            params.put(keyValue.getKey(), Arrays.toString(keyValue.getValue()));
+//        }
+
+        int numbers = (int) ((Math.random() * (10 - 2)) + 2);
+        for (int i = 0; i < numbers; i++) {
+            params.put(generateString(), generateString());
         }
 
-        Context simpleContext = new Context(req.getLocale(), Map.of("queryParams", params, "textForH3", "Some text for H3!"));
+        Context data = new Context(req.getLocale(), Map.of("queryParams", params, "textForH3", "Some text for H3!"));
 
-        engine.process("first", simpleContext, resp.getWriter());
+        engine.process("first", data, resp.getWriter());
         resp.getWriter().close();
+    }
+
+    private String generateString() {
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        for (int i = 0; i < targetStringLength; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        return buffer.toString();
     }
 }

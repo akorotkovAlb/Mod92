@@ -21,6 +21,7 @@ public class CommandService {
         this.commands.put("GET /Mod92/post/get/all/posts", new GetAllPostsCommand());
         this.commands.put("POST /Mod92/post/delete/post", new DeletePostCommand());
         this.commands.put("POST /Mod92/post/create/post", new CreatePostCommand());
+        this.commands.put("GET /Mod92/olololo/path", new NewRandomCommand());
     }
 
     public void process(HttpServletRequest req, HttpServletResponse resp,

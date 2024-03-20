@@ -30,11 +30,11 @@ public class FrontControllerServlet extends HttpServlet {
     @SneakyThrows
     @Override
     public void init() throws ServletException {
-        Connection connection = DriverManager.getConnection(
-                Objects.requireNonNull(PropertyReader.getConnectionUrlForPostgres()),
-                PropertyReader.getUserForPostgres(), PropertyReader.getPasswordForPostgres());
+//        Connection connection = DriverManager.getConnection(
+//                Objects.requireNonNull(PropertyReader.getConnectionUrlForPostgres()),
+//                PropertyReader.getUserForPostgres(), PropertyReader.getPasswordForPostgres());
         engine = new TemplateEngine();
-        repository = new DBRepositoryImpl(connection);
+        repository = new PostRepositoryImpl();
         commandService = new CommandService();
 
         JavaxServletWebApplication jswa =
